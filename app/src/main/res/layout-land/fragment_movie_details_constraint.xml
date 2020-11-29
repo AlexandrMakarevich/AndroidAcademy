@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/fill"
-    tools:context=".MovieDetailsActivity">
+    tools:context=".FragmentMovieDetails">
 
     <ImageView
         android:id="@+id/title_image"
         android:layout_width="match_parent"
         android:layout_height="298dp"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/orig"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -194,9 +201,11 @@
 
     <ImageView
         android:id="@+id/icon1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="W, 1:1"
         android:layout_marginTop="7dp"
+        android:layout_marginStart="16dp"
         android:src="@drawable/robert_downey_jr"
         app:layout_constraintEnd_toStartOf="@+id/icon2"
         app:layout_constraintStart_toStartOf="parent"
@@ -204,9 +213,11 @@
 
     <ImageView
         android:id="@+id/icon2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="W, 1:1"
         android:layout_marginTop="7dp"
+        android:layout_marginStart="16dp"
         android:src="@drawable/chris_evans"
         app:layout_constraintEnd_toStartOf="@+id/icon3"
         app:layout_constraintStart_toEndOf="@+id/icon1"
@@ -214,9 +225,11 @@
 
     <ImageView
         android:id="@+id/icon3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="W, 1:1"
         android:layout_marginTop="7dp"
+        android:layout_marginStart="16dp"
         android:src="@drawable/mark_ruffalo"
         app:layout_constraintEnd_toStartOf="@+id/icon4"
         app:layout_constraintStart_toEndOf="@+id/icon2"
@@ -224,9 +237,12 @@
 
     <ImageView
         android:id="@+id/icon4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="W, 1:1"
         android:layout_marginTop="7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/chris_hemsworth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon3"
@@ -234,7 +250,7 @@
 
     <TextView
         android:id="@+id/tv1"
-        android:layout_width="80dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:gravity="center_vertical"
@@ -246,7 +262,7 @@
         app:layout_constraintTop_toBottomOf="@+id/icon1" />
     <TextView
         android:id="@+id/tv2"
-        android:layout_width="80dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:gravity="center_vertical"
@@ -259,7 +275,7 @@
 
     <TextView
         android:id="@+id/tv3"
-        android:layout_width="80dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:gravity="center_vertical"
@@ -271,7 +287,7 @@
         app:layout_constraintTop_toBottomOf="@+id/icon3" />
     <TextView
         android:id="@+id/tv4"
-        android:layout_width="80dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:gravity="center_vertical"
@@ -282,6 +298,5 @@
         app:layout_constraintStart_toEndOf="@+id/tv3"
         app:layout_constraintTop_toBottomOf="@+id/icon4" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
