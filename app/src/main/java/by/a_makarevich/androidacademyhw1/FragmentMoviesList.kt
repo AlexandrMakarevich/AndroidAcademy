@@ -1,5 +1,6 @@
 package by.a_makarevich.androidacademyhw1
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.a_makarevich.androidacademyhw1.adapter.MovieAdapter
 import by.a_makarevich.androidacademyhw1.adapter.OnClickListenerDetail
+
 
 class FragmentMoviesList : Fragment(), OnClickListenerDetail {
 
@@ -24,15 +27,30 @@ class FragmentMoviesList : Fragment(), OnClickListenerDetail {
         val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
         val recyclerView: RecyclerView? = view?.findViewById(R.id.recyclerView)
-        recyclerView?.apply {
+        val layoutManager = recyclerView?.layoutManager as GridLayoutManager
+
+
+        recyclerView.addItemDecoration(MovieListItemDecoration(50, numberSpans(layoutManager)))
+
+
+        recyclerView.apply {
             this.adapter = movieAdapter
         }
-
-
         return view
     }
 
     override fun onItemClick() {
         findNavController().navigate(R.id.action_fragmentMoviesList_to_fragmentMovieDetails)
     }
+
+    private fun numberSpans(layoutManager: GridLayoutManager): Int {
+        return if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            layoutManager.spanCount = 2
+            2
+        } else {
+            layoutManager.spanCount = 4
+            4
+        }
+    }
+
 }

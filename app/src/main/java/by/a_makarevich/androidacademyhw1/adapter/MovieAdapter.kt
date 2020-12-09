@@ -8,30 +8,32 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import by.a_makarevich.androidacademyhw1.R
 
-class MovieAdapter(private val onClickListenerDetail: OnClickListenerDetail) : RecyclerView.Adapter<ViewHolderMovie>() {
+class MovieAdapter(private val onClickListenerDetail: OnClickListenerDetail) :
+    RecyclerView.Adapter<ViewHolderMovie>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderMovie {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movies_list_item, null)
+
         Log.d("MyLog", "onCreateViewHolder")
         return ViewHolderMovie(view)
 
     }
 
     override fun onBindViewHolder(holder: ViewHolderMovie, position: Int) {
-        holder.image_view_movie.setOnClickListener {
+        holder.imageViewMovie.setOnClickListener {
             onClickListenerDetail.onItemClick()
         }
 
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return 10
     }
 
 }
 
 class ViewHolderMovie(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val image_view_movie = itemView.findViewById<ImageView>(R.id.image_view_movie)
+    val imageViewMovie: ImageView = itemView.findViewById(R.id.image_view_movie)
 
 }
 
