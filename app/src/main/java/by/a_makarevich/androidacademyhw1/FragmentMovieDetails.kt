@@ -3,6 +3,7 @@ package by.a_makarevich.androidacademyhw1
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -27,6 +28,7 @@ class FragmentMovieDetails : Fragment() {
     private var textViewReview: TextView? = null
     private var textViewOverview: TextView? = null
     private var imageViewTitleImage: ImageView? = null
+    private var textViewCast: TextView? = null
 
     private val actorAdapter = ActorAdapter()
     override fun onCreateView(
@@ -53,6 +55,9 @@ class FragmentMovieDetails : Fragment() {
         textViewReview?.text = movie.numberOfRatings.toString().plus(" Reviews")
         textViewOverview?.text = movie.overview
 
+        val sizeActors = movie.actors.size
+        if (sizeActors == 0) textViewCast?.visibility = INVISIBLE
+
         actorAdapter.setData(movie.actors)
 
         recyclerViewActors?.addItemDecoration(ActorsRecyclerDecorator(30))
@@ -77,6 +82,7 @@ class FragmentMovieDetails : Fragment() {
         textViewReview = view.findViewById(R.id.review)
         textViewOverview = view.findViewById(R.id.overview)
         imageViewTitleImage = view.findViewById(R.id.title_image)
+        textViewCast = view.findViewById(R.id.cast)
 
     }
 
