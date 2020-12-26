@@ -32,7 +32,6 @@ class MovieAdapter(private val onClickListenerDetail: OnClickListenerDetail) :
             onClickListenerDetail.onItemClick(data[position])
         }
     }
-
     override fun getItemCount(): Int = data.size
 
     fun setData(data: List<Movie>) {

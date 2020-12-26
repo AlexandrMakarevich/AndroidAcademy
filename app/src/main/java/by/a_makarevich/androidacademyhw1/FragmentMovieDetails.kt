@@ -1,6 +1,7 @@
 package by.a_makarevich.androidacademyhw1
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -9,15 +10,20 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.a_makarevich.androidacademyhw1.adapter.ActorAdapter
+import by.a_makarevich.androidacademyhw1.data.Actor
 import by.a_makarevich.androidacademyhw1.data.Movie
+import by.a_makarevich.androidacademyhw1.viewmodels.ViewModelFragmentMovieDetails
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class FragmentMovieDetails : Fragment() {
+
+    private val viewModel: ViewModelFragmentMovieDetails by viewModels { ViewModelFactory() }
 
     private var textViewBack: TextView? = null
     private var recyclerViewActors: RecyclerView? = null
@@ -30,6 +36,8 @@ class FragmentMovieDetails : Fragment() {
     private var imageViewTitleImage: ImageView? = null
     private var textViewCast: TextView? = null
 
+    private var movieId: Int? = 0
+
     private val actorAdapter = ActorAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,33 +45,18 @@ class FragmentMovieDetails : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movie_details, container, false)
+
+        viewModel.itemmovie.observe(viewLifecycleOwner) {
+            setMovie(it)
+            updateAdapter(it.actors)
+        }
+
         initViews(view)
         initClickListeners()
+        setUpActorAdapter()
+        movieId = getMovieId()
+        viewModel.getMovie(movieId, requireContext())
 
-
-        val movie = arguments?.getParcelable<Movie>(Movie::class.java.toString())
-
-        Glide.with(imageViewTitleImage!!)
-            .load(movie?.backdrop)
-            .transform(CenterInside(), RoundedCorners(24))
-            .into(imageViewTitleImage!!)
-
-        textViewMinimumAge?.text = movie?.minimumAge.toString().plus("+")
-        textViewTitle?.text = movie?.title
-        textViewGenre?.text = movie?.genres?.joinToString(separator = ", ", transform = { it.name })
-        ratingBar?.rating = movie?.ratings!! / 2
-        textViewReview?.text = movie.numberOfRatings.toString().plus(" Reviews")
-        textViewOverview?.text = movie.overview
-
-        val sizeActors = movie.actors.size
-        if (sizeActors == 0) textViewCast?.visibility = INVISIBLE
-
-        actorAdapter.setData(movie.actors)
-
-        recyclerViewActors?.addItemDecoration(ActorsRecyclerDecorator(30))
-        recyclerViewActors?.apply {
-            this.adapter = actorAdapter
-        }
         return view
     }
 
@@ -99,9 +92,46 @@ class FragmentMovieDetails : Fragment() {
     }
 
     private fun initClickListeners() {
+        Log.d("MyLog", "Back pressed")
         textViewBack?.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun getMovieId() : Int? {
+        return arguments?.getInt(MOVIEID)
+    }
+
+    private fun setMovie(movie: Movie) {
+
+        Glide.with(imageViewTitleImage!!)
+            .load(movie.backdrop)
+            .transform(CenterInside(), RoundedCorners(24))
+            .into(imageViewTitleImage!!)
+
+        textViewMinimumAge?.text = movie.minimumAge.toString().plus("+")
+        textViewTitle?.text = movie.title
+        textViewGenre?.text = movie.genres.joinToString(separator = ", ", transform = { it.name })
+        ratingBar?.rating = movie.ratings / 2
+        textViewReview?.text = movie.numberOfRatings.toString().plus(" Reviews")
+        textViewOverview?.text = movie.overview
+        val sizeActors = movie.actors.size
+        if (sizeActors == 0) textViewCast?.visibility = INVISIBLE
+
+    }
+
+    private fun setUpActorAdapter() {
+        recyclerViewActors?.addItemDecoration(ActorsRecyclerDecorator(30))
+        recyclerViewActors?.apply {
+            this.adapter = actorAdapter
+        }
+    }
+    private fun updateAdapter(actors: List<Actor>){
+        actorAdapter.setData(actors)
+    }
+
+    companion object {
+        const val MOVIEID = "movieId"
     }
 
 }
