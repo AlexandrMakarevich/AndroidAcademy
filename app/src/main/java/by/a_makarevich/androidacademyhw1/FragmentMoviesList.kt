@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.a_makarevich.androidacademyhw1.adapter.MovieAdapter
 import by.a_makarevich.androidacademyhw1.adapter.OnClickListenerDetail
 import by.a_makarevich.androidacademyhw1.data.Movie
+import by.a_makarevich.androidacademyhw1.utils.StatusResult
 import by.a_makarevich.androidacademyhw1.viewmodels.ViewModelFragmentMoviesList
 
 
@@ -87,8 +89,13 @@ class FragmentMoviesList : Fragment(), OnClickListenerDetail {
 
 
 
-    private fun setProgressBar(status: Boolean) {
-        progressBar?.isVisible = status
+    private fun setProgressBar(status: StatusResult) {
+        when (status) {
+            StatusResult.Loading -> progressBar?.isVisible
+            StatusResult.Success -> progressBar?.isInvisible
+            StatusResult.Error -> progressBar?.isInvisible
+        }
+
     }
 
     override fun onItemClick(movie: Movie) {
