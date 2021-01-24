@@ -111,7 +111,7 @@ class FragmentMovieDetails : Fragment() {
 
         textViewMinimumAge?.text = movie.minimumAge.toString().plus("+")
         textViewTitle?.text = movie.title
-        textViewGenre?.text = movie.genres.joinToString(separator = ", ", transform = { it.name })
+        textViewGenre?.text = movie.genres.joinToString(separator = ", ", transform = { it.name.toString() })
         ratingBar?.rating = movie.ratings / 2
         textViewReview?.text = movie.numberOfRatings.toString().plus(" Reviews")
         textViewOverview?.text = movie.overview

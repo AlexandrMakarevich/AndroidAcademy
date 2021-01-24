@@ -32,10 +32,12 @@ class MovieAdapter(private val onClickListenerDetail: OnClickListenerDetail) :
             onClickListenerDetail.onItemClick(data[position])
         }
     }
+
     override fun getItemCount(): Int = data.size
 
     fun setData(data: List<Movie>) {
         this.data = data
+        notifyDataSetChanged()
     }
 }
 
@@ -51,12 +53,13 @@ class ViewHolderMovie(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(movie: Movie) {
         title.text = movie.title
         imageViewGlide(movie)
-        minimumAge.text = movie.minimumAge.toString().plus("+")
+        minimumAge.text = movie.minimumAge
         genre.text =
-            movie.genres.joinToString(separator = ", ", transform = { it.name })
+            movie.genres.joinToString(separator = ", ", transform = { it.name})
         ratingBar.rating = movie.ratings / 2
         reviews.text = movie.numberOfRatings.toString().plus(" Reviews")
-        runTime.text = movie.runtime.toString().plus(" min")
+        if ((movie.runtime != 0)) runTime.text = movie.runtime.toString().plus(" min")
+        else runTime.text = ""
     }
 
     private fun imageViewGlide(movie: Movie) {

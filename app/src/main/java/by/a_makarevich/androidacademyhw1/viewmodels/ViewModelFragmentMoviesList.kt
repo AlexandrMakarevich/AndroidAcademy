@@ -1,16 +1,22 @@
 package by.a_makarevich.androidacademyhw1.viewmodels
 
-import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import by.a_makarevich.androidacademyhw1.data.Movie
-import by.a_makarevich.androidacademyhw1.data.loadMovies
 import by.a_makarevich.androidacademyhw1.utils.StatusResult
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.serialization.ExperimentalSerializationApi
+import repositories.MoveDBRepository
 
 class ViewModelFragmentMoviesList : ViewModel() {
+
+    private val scope = CoroutineScope(Dispatchers.Main)
+    private val repository = MoveDBRepository()
 
     private val _status = MutableLiveData<StatusResult>()
     val status: LiveData<StatusResult> get() = _status
@@ -18,17 +24,24 @@ class ViewModelFragmentMoviesList : ViewModel() {
     private val _movieList = MutableLiveData<List<Movie>>(emptyList())
     val movieList: LiveData<List<Movie>> get() = _movieList
 
-    fun getMovies(context: Context) {
-        viewModelScope.launch {
-            try {
-                _status.value = StatusResult.Loading
-                val list = loadMovies(context)
-                _movieList.value = list
 
+    @ExperimentalSerializationApi
+    fun getMoviesRetrofit() {
+        try {
+            scope.launch {
+                _status.value = StatusResult.Loading
+                val list = repository.loadMovies()
+                Log.d("MyLog", "fromViewModel=========================" + list[1].minimumAge)
+                _movieList.value = list
                 _status.value = StatusResult.Success
-            } catch (excepcion: Exception) {
-                _status.value = StatusResult.Error
             }
+        } catch (excepcion: Exception) {
+            _status.value = StatusResult.Error
         }
+    }
+
+    override fun onCleared() {
+        scope.cancel()
+        super.onCleared()
     }
 }
