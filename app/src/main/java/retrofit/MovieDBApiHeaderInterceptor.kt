@@ -15,7 +15,6 @@ class MovieDBApiHeaderInterceptor : Interceptor {
             .build()
         return chain.proceed(request)
     }
-
     companion object {
         private const val API_KEY_HEADER = "api_key"
         const val apiKey = "1d52efae9f0ec74665609b2f7daace03"

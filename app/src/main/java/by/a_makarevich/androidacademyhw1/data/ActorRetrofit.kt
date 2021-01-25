@@ -5,14 +5,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ListActors(
-    val actors: ActorRetrofit
-)
-
-@Serializable
-data class ActorRetrofit(
-    val id: Int,
-    @SerialName("name")
-    val name: String,
-    @SerialName("picture")
-    val picture: String
-)
+    val cast: List<ActorRetrofit>
+) {
+    @Serializable
+    data class ActorRetrofit(
+        @SerialName("id")
+        val id: Int,
+        @SerialName("name")
+        val name: String,
+        @SerialName("profile_path")
+        val picture: String?
+    )
+}

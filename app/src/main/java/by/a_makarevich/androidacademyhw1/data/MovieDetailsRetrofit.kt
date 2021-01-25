@@ -22,5 +22,16 @@ data class MovieDetailsRetrofit(
     @SerialName("adult")
     val adult: Boolean,
     @SerialName("runtime")
-    val runtime: Int
+    val runtime: Int,
+    @SerialName("genres")
+    val genres: List<GenreJson>
 )
+
+@Serializable
+data class GenreJson(
+    @SerialName("id")
+    val id: Int,
+    @SerialName("name")
+    val name: String
+)
+

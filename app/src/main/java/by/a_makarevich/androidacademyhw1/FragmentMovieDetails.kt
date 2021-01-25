@@ -55,7 +55,7 @@ class FragmentMovieDetails : Fragment() {
         initClickListeners()
         setUpActorAdapter()
         movieId = getMovieId()
-        viewModel.getMovie(movieId, requireContext())
+        viewModel.getMovie(movieId!!)
 
         return view
     }
@@ -109,15 +109,14 @@ class FragmentMovieDetails : Fragment() {
             .transform(CenterInside(), RoundedCorners(24))
             .into(imageViewTitleImage!!)
 
-        textViewMinimumAge?.text = movie.minimumAge.toString().plus("+")
+        textViewMinimumAge?.text = movie.minimumAge
         textViewTitle?.text = movie.title
-        textViewGenre?.text = movie.genres.joinToString(separator = ", ", transform = { it.name.toString() })
+        textViewGenre?.text = movie.genres.joinToString(separator = ", ", transform = { it.name})
         ratingBar?.rating = movie.ratings / 2
         textViewReview?.text = movie.numberOfRatings.toString().plus(" Reviews")
         textViewOverview?.text = movie.overview
         val sizeActors = movie.actors.size
         if (sizeActors == 0) textViewCast?.visibility = INVISIBLE
-
     }
 
     private fun setUpActorAdapter() {

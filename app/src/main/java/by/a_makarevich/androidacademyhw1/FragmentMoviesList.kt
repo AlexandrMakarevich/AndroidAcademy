@@ -103,9 +103,9 @@ class FragmentMoviesList : Fragment(), OnClickListenerDetail {
         }
     }
 
-    override fun onItemClick(movie: Movie) {
+    override fun onItemClick(movie_id: Int) {
         val bundle = Bundle()
-        bundle.putInt(MOVIEID, movie.id)
+        bundle.putInt(MOVIEID, movie_id)
         findNavController().navigate(R.id.action_fragmentMoviesList_to_fragmentMovieDetails, bundle)
     }
 

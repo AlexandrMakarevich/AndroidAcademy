@@ -7,7 +7,7 @@ import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import retrofit.RetrofitModule
 
-class MoveDBRepository {
+class MovieDBRepository {
 
     @ExperimentalSerializationApi
     suspend fun loadMovies(): List<Movie> = withContext(Dispatchers.IO) {
@@ -17,10 +17,10 @@ class MoveDBRepository {
         val genresMap: List<Genre> =
             RetrofitModule.movieDBApi.getGenre().genres.map { Genre(id = it.id, name = it.name) }
 
-        val listRuntimes: MutableList<MoveRuntime> = mutableListOf()
+        val listRuntimes: MutableList<MovieRuntime> = mutableListOf()
         listMoviesResponse.results.forEach {
             val runtime: Int = RetrofitModule.movieDBApi.getMovieDetails(it.id).runtime
-            listRuntimes.add(MoveRuntime(it.id, runtime))
+            listRuntimes.add(MovieRuntime(it.id, runtime))
         }
 
         return@withContext pasreToMovies(listMoviesResponse, genresMap, listRuntimes)
@@ -29,7 +29,7 @@ class MoveDBRepository {
     private fun pasreToMovies(
         listMoviesResponse: ListMovieRetrofitResponse,
         genres: List<Genre>,
-        listRuntimes: List<MoveRuntime>
+        listRuntimes: List<MovieRuntime>
     ): List<Movie> {
         val movies: MutableList<Movie> = mutableListOf()
 
@@ -53,7 +53,7 @@ class MoveDBRepository {
         return movies
     }
 
-    private fun getRuntime(listRuntimes: List<MoveRuntime>, movieResponse: MovieRetrofitResponse) : Int{
+    private fun getRuntime(listRuntimes: List<MovieRuntime>, movieResponse: MovieRetrofitResponse) : Int{
         val time = 0
         for (runtime in listRuntimes) {
             if (runtime.id_movie == movieResponse.id) {

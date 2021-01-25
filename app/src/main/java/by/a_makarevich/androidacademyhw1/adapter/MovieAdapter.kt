@@ -29,7 +29,7 @@ class MovieAdapter(private val onClickListenerDetail: OnClickListenerDetail) :
     override fun onBindViewHolder(holder: ViewHolderMovie, position: Int) {
         holder.bind(data[position])
         holder.itemView.setOnClickListener {
-            onClickListenerDetail.onItemClick(data[position])
+            onClickListenerDetail.onItemClick(data[position].id)
         }
     }
 
@@ -71,5 +71,5 @@ class ViewHolderMovie(itemView: View) : RecyclerView.ViewHolder(itemView) {
 }
 
 interface OnClickListenerDetail {
-    fun onItemClick(movie: Movie)
+    fun onItemClick(movie_id: Int)
 }

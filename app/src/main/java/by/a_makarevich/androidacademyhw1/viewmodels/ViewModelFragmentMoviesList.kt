@@ -11,12 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
-import repositories.MoveDBRepository
+import repositories.MovieDBRepository
 
 class ViewModelFragmentMoviesList : ViewModel() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
-    private val repository = MoveDBRepository()
+    private val repository = MovieDBRepository()
 
     private val _status = MutableLiveData<StatusResult>()
     val status: LiveData<StatusResult> get() = _status
@@ -39,7 +39,6 @@ class ViewModelFragmentMoviesList : ViewModel() {
             _status.value = StatusResult.Error
         }
     }
-
     override fun onCleared() {
         scope.cancel()
         super.onCleared()
