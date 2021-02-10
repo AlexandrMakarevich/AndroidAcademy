@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentMoviesList"
-        android:name="by.a_makarevich.androidacademyhw1.FragmentMoviesList"
+        android:name="by.a_makarevich.androidacademyhw1.ui.movies.FragmentMoviesList"
         android:label="fragment_movies_list"
         tools:layout="@layout/fragment_movies_list" >
         <action
@@ -16,7 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentMovieDetails"
-        android:name="by.a_makarevich.androidacademyhw1.FragmentMovieDetails"
+        android:name="by.a_makarevich.androidacademyhw1.ui.details.FragmentMovieDetails"
         android:label="fragment_movie_details_constraint"
-        tools:layout="@layout/fragment_movie_details_constraint" />
+        tools:layout="@layout/fragment_movie_details" >
+        <action
+            android:id="@+id/action_fragmentMovieDetails_to_fragmentMoviesList"
+            app:destination="@id/fragmentMoviesList" />
+    </fragment>
 </navigation>
