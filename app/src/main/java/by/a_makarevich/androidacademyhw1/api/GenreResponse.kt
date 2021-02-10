@@ -6,11 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ListGenres(
     @SerialName("genres")
-    val genres: List<GenreRetrofit>
-)
-
-@Serializable
-data class GenreRetrofit(
-    val id: Int,
-    val name: String
+    val genres: List<Genre>
 )

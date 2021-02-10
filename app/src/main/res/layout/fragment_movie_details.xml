@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fill"
-    tools:context=".FragmentMovieDetails">
+    tools:context="by.a_makarevich.androidacademyhw1.ui.details.FragmentMovieDetails">
 
     <ImageView
         android:id="@+id/title_image"
@@ -54,7 +54,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="226dp"
         android:background="@drawable/rectangle"
-        android:text="@string/thirteen"
         android:gravity="center"
         android:textSize="16sp"
         android:textColor="@color/white"
@@ -68,7 +67,7 @@
         android:layout_marginStart="16dp"
         android:gravity="center_vertical"
         android:lineSpacingExtra="0sp"
-        android:text="@string/avengers"
+        tools:text="@string/avengers"
         android:textAppearance="@style/avengers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minimumAge" />
@@ -80,7 +79,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:lineSpacingExtra="4sp"
-        android:text="@string/tag"
+        tools:text="@string/tag"
         android:textAppearance="@style/tag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_title" />
@@ -94,7 +93,7 @@
         android:theme="@style/MyRatingBar"
         android:numStars="5"
         android:stepSize="0.5"
-        android:rating="3"
+        tools:rating="3"
         android:isIndicator="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genre"
@@ -109,7 +108,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         android:lineSpacingExtra="4sp"
-        android:text="@string/review"
+        tools:text="@string/review"
         android:textAppearance="@style/review"
         app:layout_constraintStart_toEndOf="@+id/rating_bar"
         app:layout_constraintTop_toBottomOf="@+id/genre" />
@@ -138,7 +137,7 @@
         android:alpha="0.75"
         android:gravity="center_vertical"
         android:lineSpacingExtra="4sp"
-        android:text="@string/after_the_d"
+        tools:text="@string/after_the_d"
         android:textAppearance="@style/after_the_d"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -171,5 +170,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         tools:listitem="@layout/view_holder_actor"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility = "visible"
+        android:visibility="invisible"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

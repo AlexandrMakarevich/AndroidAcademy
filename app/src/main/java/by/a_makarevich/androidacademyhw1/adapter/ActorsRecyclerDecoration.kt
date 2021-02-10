@@ -1,11 +1,11 @@
-package by.a_makarevich.androidacademyhw1
+package by.a_makarevich.androidacademyhw1.adapter
 
 import android.graphics.Rect
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class ActorsRecyclerDecorator(private val spacing: Int) : RecyclerView.ItemDecoration() {
+class ActorsRecyclerDecoration(private val spacing: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,

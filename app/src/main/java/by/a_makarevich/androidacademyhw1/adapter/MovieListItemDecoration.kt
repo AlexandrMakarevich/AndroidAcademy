@@ -1,4 +1,4 @@
-package by.a_makarevich.androidacademyhw1
+package by.a_makarevich.androidacademyhw1.adapter
 
 import android.graphics.Rect
 import android.view.View

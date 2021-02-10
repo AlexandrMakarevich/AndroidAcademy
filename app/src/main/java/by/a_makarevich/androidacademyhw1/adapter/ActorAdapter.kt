@@ -13,7 +13,7 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
-class ActorAdapter() : RecyclerView.Adapter<ViewHolderActor>() {
+class ActorAdapter : RecyclerView.Adapter<ViewHolderActor>() {
 
     private var actors = listOf<Actor>()
 
@@ -32,6 +32,7 @@ class ActorAdapter() : RecyclerView.Adapter<ViewHolderActor>() {
 
     fun setData(data: List<Actor>) {
         actors = data
+        notifyDataSetChanged()
     }
 }
 
@@ -44,6 +45,7 @@ class ViewHolderActor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView)
             .load(actor.picture)
             .transform(MultiTransformation(CenterCrop(), RoundedCorners(10)))
+            .error(R.drawable.ic_baseline_face_24)
             .into(imageActor)
     }
 }

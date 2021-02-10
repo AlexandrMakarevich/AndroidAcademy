@@ -3,12 +3,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
+ /*   buildFeatures {
+        viewBinding = true
+    }
+*/
     defaultConfig {
         applicationId "by.a_makarevich.androidacademyhw1"
         minSdkVersion 21
@@ -36,9 +40,14 @@ android {
 
 }
 
-dependencies {
+ext {
+    dagger_version = '2.17'
+    hilt_version = '2.28-alpha'
+    nav_version = "2.3.2"
+    paging_version = "3.0.0-alpha03"
+}
 
-    def nav_version = "2.3.2"
+dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.21"
@@ -51,7 +60,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
@@ -66,6 +74,20 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
 
+    //dagger
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+
+    //hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+    //pagging
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
 
 
 }
+

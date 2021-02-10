@@ -1,4 +1,4 @@
-package retrofit
+package by.a_makarevich.androidacademyhw1.retrofit
 
 import okhttp3.Interceptor
 import okhttp3.Response

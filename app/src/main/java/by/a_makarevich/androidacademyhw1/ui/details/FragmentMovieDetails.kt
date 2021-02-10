@@ -1,4 +1,4 @@
-package by.a_makarevich.androidacademyhw1
+package by.a_makarevich.androidacademyhw1.ui.details
 
 import android.os.Bundle
 import android.util.Log
@@ -7,23 +7,28 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import by.a_makarevich.androidacademyhw1.R
 import by.a_makarevich.androidacademyhw1.adapter.ActorAdapter
+import by.a_makarevich.androidacademyhw1.adapter.ActorsRecyclerDecoration
 import by.a_makarevich.androidacademyhw1.data.Actor
 import by.a_makarevich.androidacademyhw1.data.Movie
-import by.a_makarevich.androidacademyhw1.viewmodels.ViewModelFragmentMovieDetails
+import by.a_makarevich.androidacademyhw1.utils.StatusResult
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import dagger.hilt.android.AndroidEntryPoint
 
-class FragmentMovieDetails : Fragment() {
+@AndroidEntryPoint
+class FragmentMovieDetails : Fragment(R.layout.fragment_movie_details) {
 
-    private val viewModel: ViewModelFragmentMovieDetails by viewModels { ViewModelFactory() }
+    private val viewModel by viewModels<FragmentMovieDetailsViewModel>()
 
     private var textViewBack: TextView? = null
     private var recyclerViewActors: RecyclerView? = null
@@ -35,6 +40,7 @@ class FragmentMovieDetails : Fragment() {
     private var textViewOverview: TextView? = null
     private var imageViewTitleImage: ImageView? = null
     private var textViewCast: TextView? = null
+    private var progressBar: ProgressBar? = null
 
     private var movieId: Int? = 0
 
@@ -46,13 +52,9 @@ class FragmentMovieDetails : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movie_details, container, false)
 
-        viewModel.itemmovie.observe(viewLifecycleOwner) {
-            setMovie(it)
-            updateAdapter(it.actors)
-        }
-
         initViews(view)
         initClickListeners()
+        setUpObservers()
         setUpActorAdapter()
         movieId = getMovieId()
         viewModel.getMovie(movieId!!)
@@ -76,6 +78,7 @@ class FragmentMovieDetails : Fragment() {
         textViewOverview = view.findViewById(R.id.overview)
         imageViewTitleImage = view.findViewById(R.id.title_image)
         textViewCast = view.findViewById(R.id.cast)
+        progressBar = view.findViewById(R.id.progress_bar)
 
     }
 
@@ -89,6 +92,7 @@ class FragmentMovieDetails : Fragment() {
         textViewReview = null
         textViewOverview = null
         imageViewTitleImage = null
+        progressBar = null
     }
 
     private fun initClickListeners() {
@@ -119,14 +123,32 @@ class FragmentMovieDetails : Fragment() {
         if (sizeActors == 0) textViewCast?.visibility = INVISIBLE
     }
 
+    private fun setUpObservers(){
+        viewModel.itemmovie.observe(viewLifecycleOwner) {
+            setMovie(it)
+            updateAdapter(it.actors)
+        }
+        viewModel.status.observe(viewLifecycleOwner){
+            setProgressBar(it)
+        }
+    }
+
     private fun setUpActorAdapter() {
-        recyclerViewActors?.addItemDecoration(ActorsRecyclerDecorator(30))
+        recyclerViewActors?.addItemDecoration(ActorsRecyclerDecoration(30))
         recyclerViewActors?.apply {
             this.adapter = actorAdapter
         }
     }
     private fun updateAdapter(actors: List<Actor>){
         actorAdapter.setData(actors)
+    }
+
+    private fun setProgressBar(status: StatusResult) {
+        when (status) {
+            StatusResult.Loading -> progressBar?.visibility = View.VISIBLE
+            StatusResult.Success -> progressBar?.visibility = INVISIBLE
+            StatusResult.Error -> progressBar?.visibility = INVISIBLE
+        }
     }
 
     companion object {
