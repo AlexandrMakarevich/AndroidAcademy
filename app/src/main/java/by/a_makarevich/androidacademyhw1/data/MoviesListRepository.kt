@@ -7,7 +7,7 @@ import by.a_makarevich.androidacademyhw1.api.MovieDBApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MoviesRepositoryPagination @Inject constructor (private val movieDBApi: MovieDBApi) {
+class MoviesListRepository @Inject constructor (private val movieDBApi: MovieDBApi) {
 
     fun letMoviesFlow(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<Movie>> {
         return Pager(

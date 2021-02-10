@@ -24,6 +24,7 @@ object AppModule {
         .build()
     private val json = Json {
         ignoreUnknownKeys = true
+        coerceInputValues = true
     }
 
     @ExperimentalSerializationApi

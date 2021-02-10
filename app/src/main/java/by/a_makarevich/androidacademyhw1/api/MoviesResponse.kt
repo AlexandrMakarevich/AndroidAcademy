@@ -14,13 +14,13 @@ data class MovieRetrofitResponse(
     @SerialName("id")
     var id: Int,
     @SerialName("title")
-    val title: String,
+    val title: String = "",
     @SerialName("overview")
-    val overview: String,
+    val overview: String = "",
     @SerialName("poster_path")
-    var poster: String,
+    var poster: String = "",
     @SerialName("backdrop_path")
-    val backdrop: String,
+    val backdrop: String = "",
     @SerialName("vote_average")
     val ratings: Float,
     @SerialName("vote_count")

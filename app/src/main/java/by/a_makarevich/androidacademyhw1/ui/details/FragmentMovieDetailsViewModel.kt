@@ -5,14 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import by.a_makarevich.androidacademyhw1.data.Movie
-import by.a_makarevich.androidacademyhw1.data.MovieDBRepositoryDetails
+import by.a_makarevich.androidacademyhw1.data.MovieDetailsRepository
 import by.a_makarevich.androidacademyhw1.utils.StatusResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class FragmentMovieDetailsViewModel @ViewModelInject constructor (private val repository: MovieDBRepositoryDetails) :
+class FragmentMovieDetailsViewModel @ViewModelInject constructor (private val repository: MovieDetailsRepository) :
     ViewModel() {
 
     private val scope = CoroutineScope(Dispatchers.Main)

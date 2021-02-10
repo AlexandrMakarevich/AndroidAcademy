@@ -8,7 +8,6 @@ class MovieDBApiHeaderInterceptor : Interceptor {
         val originalRequest = chain.request()
         val originalHttpUrl = originalRequest.url.newBuilder()
             .addQueryParameter(API_KEY_HEADER, apiKey)
-            .addQueryParameter("page", "1")
             .build()
         val request = originalRequest.newBuilder()
             .url(originalHttpUrl)

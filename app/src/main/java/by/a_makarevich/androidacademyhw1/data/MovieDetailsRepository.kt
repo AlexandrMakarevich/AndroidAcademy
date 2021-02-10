@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MovieDBRepositoryDetails @Inject constructor(private val movieDBApi: MovieDBApi) {
+class MovieDetailsRepository @Inject constructor(private val movieDBApi: MovieDBApi) {
 
     @ExperimentalSerializationApi
     suspend fun loadMovie(id: Int): Movie = withContext(Dispatchers.IO) {
