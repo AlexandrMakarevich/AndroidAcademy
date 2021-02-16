@@ -45,6 +45,7 @@ ext {
     hilt_version = '2.28-alpha'
     nav_version = "2.3.2"
     paging_version = "3.0.0-alpha03"
+    room_version = "2.3.0-beta01"
 }
 
 dependencies {
@@ -84,10 +85,12 @@ dependencies {
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
-    //pagging
+    //paging3
     implementation "androidx.paging:paging-runtime:$paging_version"
 
-
-
+    //room db
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:2.3.0-beta01"
 }
 
