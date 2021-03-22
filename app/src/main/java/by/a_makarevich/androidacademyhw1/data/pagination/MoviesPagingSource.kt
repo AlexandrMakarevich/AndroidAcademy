@@ -1,10 +1,13 @@
-package by.a_makarevich.androidacademyhw1.data
+package by.a_makarevich.androidacademyhw1.data.pagination
 
 import android.util.Log
 import androidx.paging.PagingSource
 import by.a_makarevich.androidacademyhw1.api.ListMovieRetrofitResponse
 import by.a_makarevich.androidacademyhw1.api.MovieDBApi
 import by.a_makarevich.androidacademyhw1.api.MovieRetrofitResponse
+import by.a_makarevich.androidacademyhw1.data.Genre
+import by.a_makarevich.androidacademyhw1.data.Movie
+import by.a_makarevich.androidacademyhw1.data.MovieRuntime
 import by.a_makarevich.androidacademyhw1.ui.movies.FragmentMoviesList
 import retrofit2.HttpException
 import java.io.IOException
@@ -50,6 +53,7 @@ class MoviesPagingSource(private val movieDBApi: MovieDBApi) : PagingSource<Int,
         val movies: MutableList<Movie> = mutableListOf()
 
         listMoviesResponse.results.forEach { moviesResponse ->
+
             movies.add(
                 Movie(
                     id = moviesResponse.id,

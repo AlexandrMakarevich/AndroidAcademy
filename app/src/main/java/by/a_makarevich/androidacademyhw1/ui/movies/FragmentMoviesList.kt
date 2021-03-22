@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,7 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list),
     }
 
 
+    @ExperimentalPagingApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,9 +50,10 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list),
         fetchMovies()
     }
 
+    @ExperimentalPagingApi
     private fun fetchMovies() {
         lifecycleScope.launch {
-            viewModel.fetchMovies().distinctUntilChanged().collectLatest {
+            viewModel.fetchMoviesDB().distinctUntilChanged().collectLatest {
                 movieAdapter.submitData(it)
             }
         }

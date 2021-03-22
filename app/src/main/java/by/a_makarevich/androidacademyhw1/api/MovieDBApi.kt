@@ -16,6 +16,10 @@ interface MovieDBApi {
         @Query("limit") size: Int
     ): ListMovieRetrofitResponse
 
+    @GET("movie/now_playing")
+    suspend fun getMoviesNowPlayingPaginationMediator(
+    ): ListMovieRetrofitResponse
+
 
     @GET("genre/movie/list")
     suspend fun getGenre(): ListGenres
