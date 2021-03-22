@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/recyclerView"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
+        app:spanCount="4"
         app:layout_constraintTop_toBottomOf="@id/tv_movies_list"
         android:layout_marginTop="27dp"
         tools:listitem="@layout/movies_list_item"

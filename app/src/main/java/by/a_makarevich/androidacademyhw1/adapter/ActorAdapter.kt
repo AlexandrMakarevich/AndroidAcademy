@@ -8,7 +8,7 @@ import by.a_makarevich.androidacademyhw1.R
 
 class ActorAdapter() : RecyclerView.Adapter<ViewHolderActor>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderActor {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_actor, null)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_actor, parent, false)
         return ViewHolderActor(view)
     }
 
@@ -19,10 +19,7 @@ class ActorAdapter() : RecyclerView.Adapter<ViewHolderActor>() {
     override fun getItemCount(): Int {
         return 10
     }
-
-
 }
-
 class ViewHolderActor(itemView: View) : RecyclerView.ViewHolder(itemView){
 
 }
