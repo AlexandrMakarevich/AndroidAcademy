@@ -18,7 +18,7 @@ class ActorAdapter() : RecyclerView.Adapter<ViewHolderActor>() {
     private var actors = listOf<Actor>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderActor {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_actor, null)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_actor, parent, false)
         return ViewHolderActor(view)
     }
 
@@ -29,8 +29,7 @@ class ActorAdapter() : RecyclerView.Adapter<ViewHolderActor>() {
     override fun getItemCount(): Int {
         return actors.size
     }
-
-    fun setData(data: List<Actor>) {
+   fun setData(data: List<Actor>) {
         actors = data
     }
 }
@@ -38,7 +37,7 @@ class ActorAdapter() : RecyclerView.Adapter<ViewHolderActor>() {
 class ViewHolderActor(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val imageActor: ImageView = itemView.findViewById(R.id.image_actor)
     private val nameActor: TextView = itemView.findViewById(R.id.text_view_actor)
-
+  
     fun bind(actor: Actor) {
         nameActor.text = actor.name
         Glide.with(itemView)

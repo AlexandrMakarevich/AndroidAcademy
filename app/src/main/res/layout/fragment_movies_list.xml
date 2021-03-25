@@ -29,6 +29,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_movies_list"
         android:layout_marginTop="6dp"
         android:paddingBottom="80dp"
-        app:spanCount="2"
+        app:spanCount="4"
         tools:listitem="@layout/movies_list_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

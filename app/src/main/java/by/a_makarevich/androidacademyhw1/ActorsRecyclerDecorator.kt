@@ -21,7 +21,9 @@ class ActorsRecyclerDecorator(private val spacing: Int) : RecyclerView.ItemDecor
         } else outRect.left = spacing
 
 
-        if (itemCount > 0 && itemPosition == itemCount - 1) {
+        val isLast = itemPosition == itemCount - 1
+
+        if (itemCount > 0 && isLast) {
             outRect.right = spacing
         } else outRect.right = spacing / 2
 
