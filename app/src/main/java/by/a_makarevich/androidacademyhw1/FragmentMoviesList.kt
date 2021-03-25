@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.a_makarevich.androidacademyhw1.adapter.MovieAdapter
 import by.a_makarevich.androidacademyhw1.adapter.OnClickListenerDetail
 
+
 class FragmentMoviesList : Fragment(), OnClickListenerDetail {
 
     private val movieAdapter = MovieAdapter(this)
@@ -24,15 +25,21 @@ class FragmentMoviesList : Fragment(), OnClickListenerDetail {
         val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
         val recyclerView: RecyclerView? = view?.findViewById(R.id.recyclerView)
-        recyclerView?.apply {
-            this.adapter = movieAdapter
+
+        val orientation = resources.configuration.orientation
+
+        recyclerView?.addItemDecoration(MovieListItemDecoration(50, orientation))
+
+
+        recyclerView.apply {
+            this?.adapter = movieAdapter
         }
-
-
         return view
     }
 
     override fun onItemClick() {
         findNavController().navigate(R.id.action_fragmentMoviesList_to_fragmentMovieDetails)
     }
+
+
 }
