@@ -18,5 +18,9 @@
         android:id="@+id/fragmentMovieDetails"
         android:name="by.a_makarevich.androidacademyhw1.FragmentMovieDetails"
         android:label="fragment_movie_details_constraint"
-        tools:layout="@layout/fragment_movie_details" />
+        tools:layout="@layout/fragment_movie_details" >
+        <action
+            android:id="@+id/action_fragmentMovieDetails_to_fragmentMoviesList"
+            app:destination="@id/fragmentMoviesList" />
+    </fragment>
 </navigation>

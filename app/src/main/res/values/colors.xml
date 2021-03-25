@@ -6,6 +6,5 @@
     <color name="colorStar1">#6D6D80</color>
     <color name="colorStar2">#FF3365</color>
     <color name="fill">#191926</color>
-
-
+    <color name="white">#FFFFFF</color>
 </resources>
